@@ -131,9 +131,6 @@ const ButtonsContainer: React.FC<buttonsContainerProps> = () => {
       }
     } else if (inputValue === "0") {
       setInputValue(num);
-    } else if (inputValue === "/" && num === "0") {
-      setMessage("You can't divide by 0");
-      setShowMessage(true);
     } else if (
       inputValue === "+" ||
       inputValue === "*" ||
@@ -285,9 +282,26 @@ const ButtonsContainer: React.FC<buttonsContainerProps> = () => {
         numbersAndSigns.numbers,
         numbersAndSigns.signs
       );
-      setInputValue(finalAnswer);
+
+      if (finalAnswer === "Infinity" || finalAnswer === "-Infinity") {
+        setMessage("You can't divide by 0");
+        setShowMessage(true);
+        setEquation("");
+        setEquality(false);
+        setInputValue("0");
+      } else {
+        setInputValue(finalAnswer);
+      }
     }
-  }, [equality, equation, setInputValue]);
+  }, [
+    equality,
+    equation,
+    setInputValue,
+    setEquality,
+    setEquation,
+    setMessage,
+    setShowMessage,
+  ]);
 
   return (
     <div className='grid grid-cols-4 grid-rows-5 gap-0.5 p-1'>
