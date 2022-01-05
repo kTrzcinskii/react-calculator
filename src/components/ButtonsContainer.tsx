@@ -283,7 +283,11 @@ const ButtonsContainer: React.FC<buttonsContainerProps> = () => {
         numbersAndSigns.signs
       );
 
-      if (finalAnswer === "Infinity" || finalAnswer === "-Infinity") {
+      if (
+        finalAnswer === "Infinity" ||
+        finalAnswer === "-Infinity" ||
+        finalAnswer === "NaN"
+      ) {
         setMessage("You can't divide by 0");
         setShowMessage(true);
         setEquation("");
