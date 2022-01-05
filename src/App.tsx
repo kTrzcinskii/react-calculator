@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Display from "./components/Display";
+import ButtonsContainer from "./components/ButtonsContainer";
+import { AppContext } from "./AppContext";
 
-function App() {
+const App: React.FC = () => {
+  const [inputValue, setInputValue] = useState("0");
+  const [equation, setEquation] = useState("");
+  const [equality, setEquality] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{
+        inputValue,
+        setInputValue,
+        equation,
+        setEquation,
+        equality,
+        setEquality,
+        message,
+        setMessage,
+        showMessage,
+        setShowMessage,
+      }}
+    >
+      <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 bg-slate-900 text-white shadow-lg'>
+        <Display />
+        <ButtonsContainer />
+      </div>
+    </AppContext.Provider>
   );
-}
+};
 
 export default App;
